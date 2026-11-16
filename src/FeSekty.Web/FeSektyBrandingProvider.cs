@@ -17,7 +17,8 @@ public class FeSektyBrandingProvider : DefaultBrandingProvider
 
     public override string AppName => _localizer["AppName"];
 
-    public override string? LogoUrl => "~/images/logo/leptonxlite/logo-light-thumbnail.png";
+    // The LeptonX sidebar is always dark, so the sidebar logo is the white wordmark.
+    public override string? LogoUrl => "~/images/brand/wordmark-white.png";
 
-    public override string? LogoIconUrl => "~/images/logo/leptonxlite/logo-dark-thumbnail.png";
+    public override string? LogoIconUrl => "~/images/brand/logo-icon.png";
 }

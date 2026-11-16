@@ -1,302 +1,187 @@
 ﻿@page
 @model FeSekty.Web.Pages.IndexModel
-@using FeSekty.Web.Menus
-@using Volo.Abp.AspNetCore.Mvc.UI.Layout
-@using Microsoft.AspNetCore.Mvc.Localization
-@using FeSekty.Localization
-@using Volo.Abp.Users
-@inject IPageLayout PageLayout
-@inject IHtmlLocalizer<FeSektyResource> L
-@inject ICurrentUser CurrentUser
 @{
-    PageLayout.Content.Title = L["Menu:Home"].Value;    
-    PageLayout.Content.BreadCrumb.ShowCurrent = false;
-    PageLayout.Content.ShowToolbar = false;
-    PageLayout.Content.MenuItemName = FeSektyMenus.Home;
+    Layout = null;
+    var loginUrl = Url.Content("~/Account/Login");
 }
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FeSekty – One route. One ride.</title>
+    <meta name="description" content="FeSekty is a ride-hailing app for Egypt: book a seat on your route, share the ride and share the fare." />
+    <meta name="theme-color" content="#15803d" />
+    <link rel="icon" href="~/images/brand/favicon.ico" />
+    <link rel="stylesheet" href="~/landing/landing.css" />
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+        <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 000-7h-11a3.5 3.5 0 010-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+        <symbol id="i-card" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+        <symbol id="i-support" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1v-6h3zM3 19a2 2 0 002 2h1v-6H3z"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+        <symbol id="i-seat" viewBox="0 0 24 24"><path d="M6 3h6a2 2 0 012 2v8H6z"/><path d="M4 13h14a2 2 0 012 2v2H4zM6 21v-4M18 21v-4"/></symbol>
+    </defs>
+</svg>
 
-@section styles {
-    <abp-style src="/Pages/Index.css" />
-}
-
-<div class="getting-started-page">
-    <div class="row mb-3">
-        <div class="col-xl-6 col-12 d-flex">
-            <div class="card h-lg-100 w-100 overflow-hidden getting-started-hero-card">
-                <div class="card-body">
-                    <div class="starting-content pe-5">
-                        @if (!CurrentUser.IsAuthenticated)
-                        {
-                            <h3>@L["Welcome"]</h3>
-                            <p class="lead text-muted mb-2">@L["LongWelcomeMessage"]</p>
-                            <a href="~/Account/Login" class="btn btn-primary mb-4"><i class="fa-solid fa-right-to-bracket me-1"></i><span>@L["Login"]</span></a>
-                        }
-
-                        <h4>Getting Started</h4>
-                        <p class="text-muted mb-2">Learn how to create and run
-                            a
-                            new web application using the application startup
-                            template.</p>
-                        <a href="https://abp.io/docs/latest/get-started" class="btn  btn-brand mb-4" target="_blank">Getting Started</a>
-
-                        <h4>Web Application Development Tutorial</h4>
-                        <p class="text-muted mb-2">Learn how to build an ABP based
-                            web
-                            application named Acme.BookStore.</p>
-                        <a href="https://abp.io/docs/latest/tutorials/book-store" class="btn btn-primary soft mb-4" target="_blank">Explore Tutorial</a>
-                    </div>
-                    <img class="card-bg-image" src="~/images/getting-started/bg-01.png">
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 d-flex pe-0">
-            <div class="row w-100">
-                <div class="col-12 d-flex pe-0">
-                    <div class="card w-100 overflow-hidden">
-                        <div class="card-body pb-0">
-                            <div class="abp-support abp-logo mb-2"></div>
-                            <p class="text-muted mb-2">You can check for
-                                similar problems and solutions, or open a
-                                new topic to discuss your specific issue.</p>
-                            <a href="https://abp.io/support/questions" class="btn btn-brand soft" target="_blank">Visit Support</a>
-                            <img src="~/images/getting-started/img-support.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 d-flex pe-0">
-                    <div class="card h-md-100 w-100 overflow-hidden">
-                        <div class="card-body pb-0">
-                            <div class="abp-blog abp-logo mb-2"></div>
-                            <p class="text-muted mb-2">You can find content
-                                on .NET development, cross-platform, ASP.NET
-                                application templates, ABP-related news, and
-                                more.</p>
-                            <a href="https://abp.io/blog" class="btn btn-brand soft" target="_blank">Visit Blog</a>
-                            <img style="margin-bottom: -24px" src="~/images/getting-started/img-blog.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 d-flex">
-            <div class="card h-100 w-100 overflow-hidden">
-                <div class="card-body">
-                    <div class="abp-community abp-logo mb-2"></div>
-                    <p class="lead text-muted">A unique community platform
-                        for <span class="fw-bold">ABP Lovers!</span></p>
-                    <p class="text-muted mb-2">Explore all ABP users'
-                        experiences with the ABP Framework, discover
-                        articles and videos on how to use ABP, and join
-                        raffles for a chance to win surprise gifts!</p>
-                    <a class="btn btn-brand soft mb-3" href="https://abp.io/community/" target="_blank">Join ABP
-                        Community</a>
-                </div>
-                <img class="mt-3 img-fluid" src="~/images/getting-started/img-community.png">
-            </div>
+<header class="site-header" id="top">
+    <div class="wrap header-row">
+        <a class="brand" href="#top" aria-label="FeSekty">
+            <img src="~/images/brand/wordmark-black.png" alt="FeSekty" width="150" height="28" />
+        </a>
+        <nav class="nav" id="nav" aria-label="Main">
+            <a href="#how" data-i="nav.how">How it works</a>
+            <a href="#features" data-i="nav.features">Features</a>
+            <a href="#drivers" data-i="nav.drivers">Drive with us</a>
+            <a href="#get-app" data-i="nav.app">Get the app</a>
+        </nav>
+        <div class="header-actions">
+            <button class="lang" id="lang" type="button" aria-label="Switch language">العربية</button>
+            <a class="btn btn-ghost" href="@loginUrl" data-i="nav.login">Log in</a>
+            <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
         </div>
     </div>
+</header>
 
-    <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title text-body">More from ABP.IO</div>
+<main>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="wrap hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow" data-i="hero.eyebrow">Ride-hailing, made in Egypt</p>
+                <h1><span data-i="hero.h1a">One route.</span> <span class="accent" data-i="hero.h1b">One ride.</span></h1>
+                <p class="lead" data-i="hero.lead">Book a seat on your route, share the ride and share the fare. FeSekty is the simple, fair alternative to Uber and Careem.</p>
+                <div class="cta-row">
+                    <a class="btn btn-primary" href="#get-app" data-i="hero.cta1">Get the app</a>
+                    <a class="btn btn-outline" href="#how" data-i="hero.cta2">See how it works</a>
                 </div>
-                <div class="card-body pt-0">
-                    <div class="table-responsive">
-                        <table class="table mb-0">
-                            <tbody>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle me-2
-                                                flex-center bg-brand soft" style="width: 20px; height:
-                                                20px;"><i class="bi bi-check fs-4"></i></div>
-                                            <div> Latest Release Logs </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://github.com/abpframework/abp/releases" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle me-2
-                                                flex-center bg-brand soft" style="width: 20px; height:
-                                                20px;"><i class="bi bi-check fs-4"></i></div>
-                                            <div> Video Courses </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://abp.io/video-courses/essentials" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle me-2
-                                                flex-center bg-brand soft" style="width: 20px; height:
-                                                20px;"><i class="bi bi-check fs-4"></i></div>
-                                            <div> Samples </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://abp.io/docs/latest/samples" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle me-2
-                                                flex-center bg-brand soft" style="width: 20px; height:
-                                                20px;"><i class="bi bi-check fs-4"></i></div>
-                                            <div> Books </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://abp.io/books" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0 border-bottom-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle me-2
-                                                flex-center bg-brand soft" style="width: 20px; height:
-                                                20px;"><i class="bi bi-check fs-4"></i></div>
-                                            <div> FAQ </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50
-                                        border-bottom-0 align-middle">
-                                        <a href="https://abp.io/faq" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <ul class="trust">
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="trust.1">Fixed routes</span></li>
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="trust.2">Shared fares</span></li>
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="trust.3">Live tracking</span></li>
+                </ul>
             </div>
-        </div>
-        <div class="col-xl-6 col-lg-8 col-md-6 d-flex">
-            <div class="card">
-                <div class="card-body d-flex">
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <p class="text-muted mb-0">THE OFFICIAL GUIDE</p>
-                            <h3>Mastering ABP Framework</h3>
-                            <p class="text-muted">Written by the creator of the ABP
-                                Framework, this book will help you gain a complete
-                                understanding of the framework
-                                and modern web application development techniques.</p>
-                            <div class="d-md-flex mb-2 mb-md-0">
-                                <a href="https://www.amazon.com/gp/product/B097Z2DM8Q" target="_blank" class="btn btn-primary soft
-                                    me-md-2 mb-2 mb-md-0">
-                                    Buy on Amazon US
-                                </a>
-                                <a href="https://www.packtpub.com/product/mastering-abp-framework/9781801079242" target="_blank" class="btn btn-primary soft mb-2
-                                    mb-md-0">
-                                    Buy on PACKT
-                                </a>
-                            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="blob"></div>
+                <div class="phone">
+                    <div class="phone-top"></div>
+                    <div class="map">
+                        <span class="pin pin-a"></span>
+                        <span class="pin pin-b"></span>
+                        <svg class="path" viewBox="0 0 200 120" preserveAspectRatio="none"><path d="M30 95 C 70 95, 60 30, 110 40 S 160 25, 172 22"/></svg>
+                    </div>
+                    <div class="ride-card">
+                        <div class="ride-row"><span class="dot dot-a"></span><b>Maadi</b></div>
+                        <div class="ride-row"><span class="dot dot-b"></span><b>Downtown</b></div>
+                        <div class="ride-meta">
+                            <span><svg class="ic"><use href="#i-seat"/></svg> 3 seats left</span>
+                            <span><svg class="ic"><use href="#i-clock"/></svg> 08:15</span>
                         </div>
-                        <div class="col">
-                            <img src="~/images/getting-started/book.png">
-                        </div>
+                        <div class="ride-btn">Book a seat</div>
                     </div>
                 </div>
+                <div class="float float-1"><svg class="ic"><use href="#i-shield"/></svg><span data-i="float.1">Verified drivers</span></div>
+                <div class="float float-2"><svg class="ic"><use href="#i-users"/></svg><span data-i="float.2">Share &amp; save</span></div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title text-body">Follow us on Social Media</div>
-                </div>
-                <div class="card-body pt-0">
-                    <div class="table-responsive">
-                        <table class="table mb-0">
-                            <tbody>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <div class="logo-x me-2"></div>
-                                            <div>X.com</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://twitter.com/abpframework" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <img src="~/images/getting-started/discord.svg" class="me-2">
-                                            <div>Discord</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://abp.io/community/discord" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <img src="~/images/getting-started/stack-overflow.svg" class="me-2">
-                                            <div>Stack Overflow</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://stackoverflow.com/questions/tagged/abp" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0">
-                                        <div class="d-flex align-items-center">
-                                            <img src="~/images/getting-started/youtube.svg" class="me-2">
-                                            <div>YouTube</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50 align-middle">
-                                        <a href="https://www.youtube.com/@@Volosoft" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-0 border-bottom-0">
-                                        <div class="d-flex align-items-center">
-                                            <img src="~/images/getting-started/instagram.svg" class="me-2">
-                                            <div>Instagram</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end pe-0 opacity-50
-                                        border-bottom-0 align-middle">
-                                        <a href="https://www.instagram.com/abpframework/" target="_blank">
-                                            <i class="bi bi-box-arrow-up-right text-dark fs-6"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+        <div class="wrap">
+            <h2 class="section-title" data-i="how.title">How FeSekty works</h2>
+            <p class="section-sub" data-i="how.sub">Three taps from your door to your destination.</p>
+            <ol class="steps">
+                <li class="step">
+                    <span class="step-num">1</span>
+                    <svg class="ic ic-lg"><use href="#i-route"/></svg>
+                    <h3 data-i="how.1t">Pick your route</h3>
+                    <p data-i="how.1d">Choose where you are going and see the rides already heading your way.</p>
+                </li>
+                <li class="step">
+                    <span class="step-num">2</span>
+                    <svg class="ic ic-lg"><use href="#i-seat"/></svg>
+                    <h3 data-i="how.2t">Book your seat</h3>
+                    <p data-i="how.2d">Reserve one seat, see the fare upfront and know your pick-up time.</p>
+                </li>
+                <li class="step">
+                    <span class="step-num">3</span>
+                    <svg class="ic ic-lg"><use href="#i-pin"/></svg>
+                    <h3 data-i="how.3t">Ride &amp; arrive</h3>
+                    <p data-i="how.3d">Track your driver live, share your trip with family and arrive on time.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section section-alt" id="features">
+        <div class="wrap">
+            <h2 class="section-title" data-i="feat.title">Built for everyday rides</h2>
+            <p class="section-sub" data-i="feat.sub">Everything you need for a better commute.</p>
+            <div class="cards">
+                <article class="card"><svg class="ic ic-lg"><use href="#i-route"/></svg><h3 data-i="feat.1t">Fixed routes</h3><p data-i="feat.1d">Predictable routes and pick-up points, so you always know where to be.</p></article>
+                <article class="card"><svg class="ic ic-lg"><use href="#i-users"/></svg><h3 data-i="feat.2t">Share the fare</h3><p data-i="feat.2d">Riding together splits the cost, so every trip is easier on your wallet.</p></article>
+                <article class="card"><svg class="ic ic-lg"><use href="#i-shield"/></svg><h3 data-i="feat.3t">Safety first</h3><p data-i="feat.3d">Verified drivers, trip sharing and in-app support on every ride.</p></article>
+                <article class="card"><svg class="ic ic-lg"><use href="#i-pin"/></svg><h3 data-i="feat.4t">Live tracking</h3><p data-i="feat.4d">Watch your ride arrive in real time and get notified at pick-up.</p></article>
+                <article class="card"><svg class="ic ic-lg"><use href="#i-card"/></svg><h3 data-i="feat.5t">Clear pricing</h3><p data-i="feat.5d">See your fare before you book. No surprises when you arrive.</p></article>
+                <article class="card"><svg class="ic ic-lg"><use href="#i-support"/></svg><h3 data-i="feat.6t">Local support</h3><p data-i="feat.6d">A team that speaks your language, ready to help when you need it.</p></article>
             </div>
         </div>
+    </section>
+
+    <!-- DRIVERS -->
+    <section class="drivers" id="drivers">
+        <div class="wrap drivers-grid">
+            <div>
+                <p class="eyebrow eyebrow-light" data-i="drv.eyebrow">For drivers</p>
+                <h2 data-i="drv.title">Drive with FeSekty</h2>
+                <p class="lead lead-light" data-i="drv.lead">Fill your empty seats on the routes you already drive. Set your schedule, keep more of what you earn and get paid for every shared ride.</p>
+                <ul class="checks">
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="drv.1">Choose your own routes and hours</span></li>
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="drv.2">More riders per trip</span></li>
+                    <li><svg class="ic"><use href="#i-check"/></svg><span data-i="drv.3">Simple in-app earnings view</span></li>
+                </ul>
+                <a class="btn btn-light" href="#get-app" data-i="drv.cta">Become a driver</a>
+            </div>
+            <div class="drivers-art" aria-hidden="true"><img src="~/images/brand/logo-icon.png" alt="" width="220" height="220" /></div>
+        </div>
+    </section>
+
+    <!-- GET THE APP -->
+    <section class="section" id="get-app">
+        <div class="wrap get-app">
+            <h2 class="section-title" data-i="app.title">Take FeSekty with you</h2>
+            <p class="section-sub" data-i="app.sub">The FeSekty app for Android and iOS is coming soon.</p>
+            <div class="stores">
+                <span class="store" aria-disabled="true"><svg class="ic"><use href="#i-phone"/></svg><span><small data-i="app.soon">Coming soon</small><b>Google Play</b></span></span>
+                <span class="store" aria-disabled="true"><svg class="ic"><use href="#i-phone"/></svg><span><small data-i="app.soon2">Coming soon</small><b>App Store</b></span></span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="wrap footer-row">
+        <img src="~/images/brand/logo-white.png" alt="FeSekty – One route. One ride." width="170" height="42" />
+        <nav class="footer-nav" aria-label="Footer">
+            <a href="#how" data-i="nav.how">How it works</a>
+            <a href="#features" data-i="nav.features">Features</a>
+            <a href="#drivers" data-i="nav.drivers">Drive with us</a>
+            <a href="@loginUrl" data-i="foot.admin">Team login</a>
+        </nav>
+        <p class="copy">&copy; 2026 FeSekty. <span data-i="foot.rights">All rights reserved.</span></p>
     </div>
-</div>
+</footer>
+
+<script src="~/landing/landing.js"></script>
+</body>
+</html>

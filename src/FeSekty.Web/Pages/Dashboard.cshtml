@@ -1,0 +1,53 @@
+@page
+@model FeSekty.Web.Pages.DashboardModel
+@using FeSekty.Web.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Microsoft.AspNetCore.Mvc.Localization
+@using FeSekty.Localization
+@using Volo.Abp.Users
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<FeSektyResource> L
+@inject ICurrentUser CurrentUser
+@{
+    PageLayout.Content.Title = L["Menu:Home"].Value;
+    PageLayout.Content.BreadCrumb.ShowCurrent = false;
+    PageLayout.Content.ShowToolbar = false;
+    PageLayout.Content.MenuItemName = FeSektyMenus.Home;
+}
+
+<div class="card mb-4 border-0 shadow-sm">
+    <div class="card-body d-flex flex-wrap align-items-center gap-3 p-4">
+        <img src="~/images/brand/logo-icon.png" alt="FeSekty" width="64" height="64" />
+        <div>
+            <h3 class="mb-1">@L["Welcome"], @CurrentUser.UserName</h3>
+            <p class="text-muted mb-0">@L["LongWelcomeMessage"]</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <a class="card h-100 text-decoration-none border-0 shadow-sm" href="~/Identity/Users">
+            <div class="card-body">
+                <h5 class="card-title text-body">Users</h5>
+                <p class="text-muted mb-0">Manage riders, drivers and staff accounts.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="card h-100 text-decoration-none border-0 shadow-sm" href="~/Identity/Roles">
+            <div class="card-body">
+                <h5 class="card-title text-body">Roles</h5>
+                <p class="text-muted mb-0">Control what each role is allowed to do.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a class="card h-100 text-decoration-none border-0 shadow-sm" href="~/swagger" target="_blank" rel="noopener">
+            <div class="card-body">
+                <h5 class="card-title text-body">API documentation</h5>
+                <p class="text-muted mb-0">Swagger reference for the mobile app backend.</p>
+            </div>
+        </a>
+    </div>
+</div>
