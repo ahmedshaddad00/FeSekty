@@ -252,7 +252,18 @@ public class FeSektyWebModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(FeSektyApplicationModule).Assembly);
+            // Web/admin services: /api/app/...
+            options.ConventionalControllers.Create(typeof(FeSektyApplicationModule).Assembly, opts =>
+            {
+                opts.TypePredicate = t => t.Namespace != "FeSekty.Mobile";
+            });
+
+            // Mobile (Flutter) services: /api/mobile/v1/...
+            options.ConventionalControllers.Create(typeof(FeSektyApplicationModule).Assembly, opts =>
+            {
+                opts.RootPath = "mobile/v1";
+                opts.TypePredicate = t => t.Namespace == "FeSekty.Mobile";
+            });
         });
     }
 
@@ -264,6 +275,7 @@ public class FeSektyWebModule : AbpModule
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "FeSekty API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
+                options.DocumentFilter<FeSekty.Web.TokenEndpointDocumentFilter>();
             }
         );
     }

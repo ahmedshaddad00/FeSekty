@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -92,6 +92,30 @@ public class OpenIddictDataSeedContributor : OpenIddictDataSeedContributorBase, 
 
 
 
+
+        // Mobile (Flutter) client - password grant + refresh token
+        var mobileClientId = configurationSection["FeSekty_Mobile:ClientId"];
+        if (!mobileClientId.IsNullOrWhiteSpace())
+        {
+            await CreateOrUpdateApplicationAsync(
+                applicationType: OpenIddictConstants.ApplicationTypes.Native,
+                name: mobileClientId!,
+                type: OpenIddictConstants.ClientTypes.Public,
+                consentType: OpenIddictConstants.ConsentTypes.Implicit,
+                displayName: "FeSekty Mobile Application",
+                secret: null,
+                grantTypes: new List<string>
+                {
+                    OpenIddictConstants.GrantTypes.Password,
+                    OpenIddictConstants.GrantTypes.RefreshToken
+                },
+                scopes: new List<string>(commonScopes) { OpenIddictConstants.Scopes.OfflineAccess },
+                redirectUris: null,
+                postLogoutRedirectUris: null,
+                clientUri: null,
+                logoUri: null
+            );
+        }
 
         // Swagger Client
         var swaggerClientId = configurationSection["FeSekty_Swagger:ClientId"];
